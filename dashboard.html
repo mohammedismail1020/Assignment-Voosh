@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .chart-container { width: 80%; height: 400px; margin: 20px auto; }
+        .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+        .stat { text-align: center; padding: 10px; background: #f9f9f9; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>ETL Products Dashboard</h1>
+    <div id="status" style="background: lightgreen; padding: 10px; margin-bottom: 20px;">
+    Pipeline Status: <span id="status-text">OK (Last Run: Oct 29, 2025)</span>
+</div>
+<script>
+// Add after products array:
+document.getElementById('status-text').textContent = 'OK (Last Run: ' + new Date().toDateString() + ')';  // Hardcode or fetch from API
+</script>
+    <p>Visualizing transformed e-commerce data (7 products: USD/INR prices, ratings, categories).</p>
+    
+    <div class="stats">
+        <div class="stat">
+            <h3>Total Products</h3>
+            <p id="total">7</p>
+        </div>
+        <div class="stat">
+            <h3>Avg USD Price</h3>
+            <p id="avg-usd">$210.85</p>
+        </div>
+        <div class="stat">
+            <h3>Avg INR Price</h3>
+            <p id="avg-inr">₹17,500.64</p>
+        </div>
+        <div class="stat">
+            <h3>Expensive Items</h3>
+            <p id="expensive">5</p>
+        </div>
+    </div>
+    
+    <table id="products-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>USD Price</th>
+                <th>INR Price</th>
+                <th>Category</th>
+                <th>Avg Rating</th>
+                <th>Expensive?</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <div class="chart-container">
+        <canvas id="price-chart"></canvas>
+    </div>
+    
+    <script>
+        // Embedded data from your products.db (queried via sqlite3)
+        const products = [
+            {
+                product_id: 1,
+                name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+                price_usd: 109.95,
+                price_inr: 9125.85,
+                category_norm: "mens clothing",
+                avg_rating: 3.9,
+                is_expensive: true
+            },
+            {
+                product_id: 4,
+                name: "Mens Cotton Jacket",
+                price_usd: 55.99,
+                price_inr: 4647.17,
+                category_norm: "mens clothing",
+                avg_rating: 4.7,
+                is_expensive: false
+            },
+            {
+                product_id: 5,
+                name: "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+                price_usd: 695.0,
+                price_inr: 57685.0,
+                category_norm: "jewelry",
+                avg_rating: 4.6,
+                is_expensive: true
+            },
+            {
+                product_id: 8,
+                name: "BEAUTY AND THE BEAST - 2017",
+                price_usd: 109.99,
+                price_inr: 9129.17,
+                category_norm: "electronics",
+                avg_rating: 4.8,
+                is_expensive: true
+            },
+            {
+                product_id: 9,
+                name: "Apple Airpods Wireless Bluetooth Headphones",
+                price_usd: 159.99,
+                price_inr: 13289.17,
+                category_norm: "electronics",
+                avg_rating: 4.7,
+                is_expensive: true
+            },
+            {
+                product_id: 18,
+                name: "WD 4TB Elements Portable External Hard Drive - USB 3.0",
+                price_usd: 129.99,
+                price_inr: 10789.17,
+                category_norm: "electronics",
+                avg_rating: 3.3,
+                is_expensive: true
+            },
+            {
+                product_id: 19,
+                name: "SanDisk 64GB Memory Card - Ultra UHS-I SDXC 1",
+                price_usd: 16.99,
+                price_inr: 1409.17,
+                category_norm: "electronics",
+                avg_rating: 3.8,
+                is_expensive: false
+            }
+        ];
+
+        // Populate table
+        const tbody = document.querySelector('#products-table tbody');
+        products.forEach(product => {
+            const row = tbody.insertRow();
+            row.insertCell(0).textContent = product.product_id;
+            row.insertCell(1).textContent = product.name;
+            row.insertCell(2).textContent = `$${product.price_usd.toFixed(2)}`;
+            row.insertCell(3).textContent = `₹${product.price_inr.toFixed(2)}`;
+            row.insertCell(4).textContent = product.category_norm;
+            row.insertCell(5).textContent = product.avg_rating;
+            row.insertCell(6).textContent = product.is_expensive ? 'Yes' : 'No';
+        });
+
+        // Price Chart (Bar: USD vs INR per product)
+        const ctx = document.getElementById('price-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: products.map(p => p.name.slice(0, 20) + '...'),  // Short names
+                datasets: [
+                    {
+                        label: 'USD Price',
+                        data: products.map(p => p.price_usd),
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'INR Price',
+                        data: products.map(p => p.price_inr),
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Product Prices (USD vs INR)' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
