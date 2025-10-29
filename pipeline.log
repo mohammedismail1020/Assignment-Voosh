@@ -1,0 +1,19 @@
+2025-10-29 20:39:51,374 - INFO - Pipeline started.
+2025-10-29 20:39:51,376 - INFO - Fetching (attempt 1/3)...
+2025-10-29 20:39:52,832 - INFO - Raw fetch: 20 products.
+2025-10-29 20:39:52,841 - INFO - Filtering out: Mens Casual Premium Slim Fit T-Shirts  (price: $22.3, rating: 4.1)
+2025-10-29 20:39:52,848 - INFO - Filtering out: Mens Casual Slim Fit (price: $15.99, rating: 2.1)
+2025-10-29 20:39:52,852 - INFO - Filtering out: White Gold Plated Princess (price: $9.99, rating: 3)
+2025-10-29 20:39:52,860 - INFO - Filtering out: Pierced Owl Rose Gold Plated Stainless Steel Double (price: $10.99, rating: 1.9)
+2025-10-29 20:39:52,862 - INFO - Filtering out: SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s (price: $109, rating: 2.9)
+2025-10-29 20:39:52,870 - INFO - Filtering out: Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin (price: $599, rating: 2.9)
+2025-10-29 20:39:52,876 - INFO - Filtering out: Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED  (price: $999.99, rating: 2.2)
+2025-10-29 20:39:52,881 - INFO - Filtering out: BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats (price: $56.99, rating: 2.6)
+2025-10-29 20:39:52,883 - INFO - Filtering out: Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket (price: $29.95, rating: 2.9)
+2025-10-29 20:39:52,887 - INFO - Filtering out: Rain Jacket Women Windbreaker Striped Climbing Raincoats (price: $39.99, rating: 3.8)
+2025-10-29 20:39:52,891 - INFO - Filtering out: MBJ Women's Solid Short Sleeve Boat Neck V  (price: $9.85, rating: 4.7)
+2025-10-29 20:39:52,894 - INFO - Filtering out: Opna Women's Short Sleeve Moisture (price: $7.95, rating: 4.5)
+2025-10-29 20:39:52,896 - INFO - Filtering out: DANVOUY Womens T Shirt Casual Cotton Short (price: $12.99, rating: 3.6)
+2025-10-29 20:39:52,896 - INFO - Transformed: 7 products (from 20 raw).
+2025-10-29 20:39:53,031 - INFO - Stored/Updated 7 products in products.db. Total records: 7
+2025-10-29 20:39:53,650 - INFO - Run logged: SUCCESS - Fetched 20, transformed 7, stored OK. Last success: 2025-10-29T20:39:51.363157
