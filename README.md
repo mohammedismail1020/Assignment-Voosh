@@ -122,7 +122,7 @@ This is local/dev-ready; for prod:
 ## Dashboard
 - **Live Demo**: [View on GitHub Pages](https://yourusername.github.io/api-fetcher/dashboard.html) (deploy via repo settings).
 - **Screenshots**: See `/screenshots/` folder (table view, chart, stats).
-- **Tech**: Vanilla HTML/JS + Chart.js (CDN). Embed your DB data as JSON array.
+- **Tech**: Vanilla HTML. Embed your DB data as JSON array.
 
 ## License & Contact
 MIT License. Built for learning; questions? Open an issue or email [mohammedismail766073@gmail.com].
