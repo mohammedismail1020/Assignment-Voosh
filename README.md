@@ -29,7 +29,7 @@ No environment variables required (hardcoded API URL; for production, add via `.
 ### Project Structure
 ```
 api-fetcher/
-├── etl_pipeline_with_monitoring.py  # Main ETL script (fetch → transform → store + monitor)
+├── fetch_products.py                 # Main ETL script (fetch → transform → store + monitor)
 ├── dashboard.html                    # Static HTML/JS dashboard with Chart.js
 ├── view_db.py                        # Optional: Quick DB query script
 ├── pipeline.log                      # Auto-generated: Full run logs
@@ -40,13 +40,13 @@ api-fetcher/
 ### Steps to Run
 1. **Clone/Open Project**:
    - Download this repo or create a folder (`mkdir api-fetcher; cd api-fetcher`).
-   - Copy `etl_pipeline_with_monitoring.py` and `dashboard.html` into it.
+   - Copy `fetch_products.py` and `dashboard.html` into it.
 
 2. **Run the Pipeline**:
    - Open terminal in folder (VS Code: Ctrl + `).
    - Execute:
      ```
-     python etl_pipeline_with_monitoring.py
+     python fetch_products.py
      ```
    - **First Run**: Fetches 20 products → Filters/transforms to ~7 → Stores in `products.db`. Outputs: "Pipeline Status: SUCCESS".
    - **Reruns**: Updates existing records (no duplicates); logs each attempt.
